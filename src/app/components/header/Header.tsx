@@ -12,7 +12,6 @@ const Header = () => {
     setIsModelOpen(false)
   }
   return (
-    <div>
       <WrapperContainer>
         <h1> Notes</h1>
         <img src='images/add-icon.png' alt='Add Icon' onClick={openModel}/>
@@ -20,11 +19,10 @@ const Header = () => {
           <StyledBtn>All</StyledBtn>
           <StyledBtn2>Only Stared</StyledBtn2>
         </StyledBtnContainer>
-      </WrapperContainer>
       {isModelOpen &&(
         <Modal closeModel={closeModel}/>
       )}
-    </div>
+      </WrapperContainer>
   );
 };
 

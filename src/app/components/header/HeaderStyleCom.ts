@@ -1,9 +1,9 @@
 // CommonBtnStyle.tsx
 import styled from "styled-components";
 export const WrapperContainer=styled.div`
-display:flex;
-padding-top:20px;
-align-items: center;
+  display:flex;
+  padding-top:20px;
+  align-items: center;
 
 h1{
     font-weight: 800;

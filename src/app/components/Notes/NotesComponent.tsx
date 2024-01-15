@@ -20,8 +20,8 @@ const NotesComponent: React.FC = () => {
 
   return (
     <Container>
-      {savedData.map((item: NoteItem, i: number) => (
-        <MainContainer key={i} style={{ backgroundColor: item.background }}>
+      {savedData.map((item: NoteItem) => (
+        <MainContainer style={{ backgroundColor: item.background }}>
           <h1>{item.title}</h1>
           <ParaContainer>
             <p>{item.content}</p>

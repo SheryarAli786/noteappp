@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { InsideContainer1, InsideContainer2, InsideContainer2div1, InsideContainer2div2, InsideContainer2div3, MainContainer, MainContainerInside, MainContainerInside1 } from './ModalStyle'
+import { ButtonsContainer, ColorContainer, ColorDateContainer, HeadingContainer, InputSectionContainer, MainContainer, NameContainer} from './ModalStyle'
+import { DateContainer } from '../Notes/NotesComponentStyle';
 interface ModelProps{
     closeModel:()=>void;
 }
@@ -40,13 +41,13 @@ const Modal:React.FC<ModelProps>=({closeModel})=> {
       };
 return(
     <MainContainer>
-        <MainContainerInside1>
+        <HeadingContainer>
             <h1>
                 Add Note
             </h1>
-        </MainContainerInside1>
-        <MainContainerInside>
-      <InsideContainer1>
+        </HeadingContainer>
+        <InputSectionContainer>
+      <NameContainer>
         <label>Name</label>
         <input type='text' placeholder='Enter name'  
          value={title}
@@ -59,32 +60,32 @@ return(
             onChange={(e) => {
               setContent(e.target.value);
             }}></textarea>
-      </InsideContainer1>
-      <InsideContainer2>
-        <InsideContainer2div1>
+      </NameContainer>
+      <ColorDateContainer>
+        <ColorContainer>
        <label >Select Color</label>
         <input type="color" value={background}
             onChange={(e) => {
               setBackground(e.target.value);
             }} />
-        </InsideContainer2div1>
-        <InsideContainer2div2>
+        </ColorContainer>
+        <DateContainer>
         <label >Date</label>
         <input type="date" value={date}
             onChange={(e) => {
               setDate(e.target.value);
             }}/>
-        </InsideContainer2div2>
-        <InsideContainer2div3>
+        </DateContainer>
+        <ButtonsContainer>
             <button onClick={closeModel}>
                 Back
             </button>
             <button className='button2' onClick={handleAdd}>
                 Save
             </button>
-        </InsideContainer2div3>
-      </InsideContainer2>
-      </MainContainerInside>
+        </ButtonsContainer>
+      </ColorDateContainer>
+      </InputSectionContainer>
     </MainContainer>
   )}
 export default Modal

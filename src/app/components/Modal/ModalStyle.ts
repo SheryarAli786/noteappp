@@ -1,8 +1,9 @@
 import styled from "styled-components";
 export const MainContainer=styled.div`
-position: absolute;
-right: 300px;
-z-index: 3;
+    position: absolute;
+    top: 150px;
+    right: 350px;
+    z-index: 3;
     height: 420px;
     margin: auto;
     width: 600px;
@@ -10,7 +11,7 @@ z-index: 3;
     border-radius: 10px;
     background-color: white;
 `
-export const InsideContainer1=styled.div`
+export const NameContainer=styled.div`
     display: flex;
     flex-direction: column;
     padding-left: 20px;
@@ -49,16 +50,16 @@ export const InsideContainer1=styled.div`
        }
     }
 `
-export const InsideContainer2=styled.div`
+export const ColorDateContainer=styled.div`
     display: flex;
     flex-direction: column;
     gap: 50px;
     padding-top: 10px;
     `
-export const InsideContainer2div1=styled.div`
-display: flex;
-flex-direction: column;
-gap: 10px;
+export const ColorContainer=styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 label{
     padding-top: 5px;
     font-weight: 600;
@@ -75,10 +76,10 @@ input{
 }
     
 `
-export const InsideContainer2div2=styled.div`
-display: flex;
-flex-direction: column;
-gap: 10px;
+export const DateContainer=styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 label{
     padding-top: 5px;
     font-weight: 600;
@@ -90,16 +91,16 @@ label{
     width: 150px;
     border-radius: 5px;
     border: 2px solid #d6dadf;
-        outline: none;
+    outline: none;
         &:focus{
             border:  2px solid skyblue;
         }
  }   
 `
-export const InsideContainer2div3=styled.div`
-display: flex;
-padding-top:40px;
-gap: 12px;
+export const ButtonsContainer=styled.div`
+    display: flex;
+    padding-top:40px;
+    gap: 12px;
 button{
     font-size: 13px;
     border: 1px solid black;
@@ -113,13 +114,13 @@ button{
     color: white;
 }
 `
-export const MainContainerInside=styled.div`
+export const InputSectionContainer=styled.div`
     display: flex;
     gap: 150px;
 `
-export const MainContainerInside1=styled.div`
-display: flex;
-justify-content: center;
+export const HeadingContainer=styled.div`
+    display: flex;
+    justify-content: center;
     h1{
        font-family: 'roboto',sans-serif;
     }

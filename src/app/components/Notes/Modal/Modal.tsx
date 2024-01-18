@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { ButtonsContainer, ColorContainer, ColorDateContainer, HeadingContainer, InputSectionContainer, MainContainer, NameContainer} from './ModalStyle'
-import { DateContainer } from '../Notes/NotesComponentStyle';
+import { ButtonsContainer, ColorContainer, ColorDateContainer, HeadingContainer, InputSectionContainer, MainContainer, NameContainer, DateContainer } from './ModalStyle'
 interface ModelProps{
     closeModel:()=>void;
+    refresher:()=>void;
+    onDataUpdate:()=>void
 }
 interface Note {
     id: number;
@@ -11,18 +12,17 @@ interface Note {
     background: string;
     date: string;
   }
-const Modal:React.FC<ModelProps>=({closeModel})=> {
+const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate})=> {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [background, setBackground] = useState("#ffffff");
+    // const [fontColor, setfontColor] = useState("#ffffff");
     const [date, setDate] = useState("");
-   
-
-
     const handleAdd = () => {
-
-            const savedData: Note [] = JSON.parse(localStorage.getItem("myNotes") || '[]');
-          
+      if (!title || !content) {
+        return alert("Title and Content is required");
+      }
+    const savedData: Note [] = JSON.parse(localStorage.getItem("myNotes") || '[]');
             let newData: Note = {
               id: Date.now(),
               title,
@@ -30,30 +30,35 @@ const Modal:React.FC<ModelProps>=({closeModel})=> {
               background,
               date,
             };
-          
             savedData.push(newData);
             localStorage.setItem("myNotes", JSON.stringify(savedData));
-
             setTitle("");
             setContent("");
             setDate("");
-      closeModel();
+           closeModel();
+           refresher();
+           onDataUpdate(); 
+      };
+      const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value);
+      };
+      const handleBackground = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setBackground(e.target.value);
+      };
+      const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setDate(e.target.value);
       };
 return(
     <MainContainer>
         <HeadingContainer>
-            <h1>
                 Add Note
-            </h1>
         </HeadingContainer>
         <InputSectionContainer>
       <NameContainer>
         <label>Name</label>
         <input type='text' placeholder='Enter name'  
          value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}></input>
+            onChange={handleTitle}></input>
         <label>Description</label>
         <textarea placeholder='Add more details'     
          value={content}
@@ -65,16 +70,12 @@ return(
         <ColorContainer>
        <label >Select Color</label>
         <input type="color" value={background}
-            onChange={(e) => {
-              setBackground(e.target.value);
-            }} />
+            onChange={handleBackground} />
         </ColorContainer>
         <DateContainer>
-        <label >Date</label>
+        <label>Date</label>
         <input type="date" value={date}
-            onChange={(e) => {
-              setDate(e.target.value);
-            }}/>
+            onChange={handleDate}/>
         </DateContainer>
         <ButtonsContainer>
             <button onClick={closeModel}>

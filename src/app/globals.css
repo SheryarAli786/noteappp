@@ -1,0 +1,19 @@
+.page-container1{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-right: 0 ;
+    margin-left: 0 ;
+    padding: 5px ;
+}
+.page-container2{
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2; 
+    color: #6c757d;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}

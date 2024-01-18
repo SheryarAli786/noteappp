@@ -4,7 +4,7 @@ export const MainContainer=styled.div`
     top: 150px;
     right: 350px;
     z-index: 3;
-    height: 420px;
+    height: 450px;
     margin: auto;
     width: 600px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -106,7 +106,6 @@ button{
     border: 1px solid black;
     padding: 10px 20px;
     background-color: white;
-    
     border-radius: 4px;
 }
 .button2{
@@ -118,10 +117,12 @@ export const InputSectionContainer=styled.div`
     display: flex;
     gap: 150px;
 `
-export const HeadingContainer=styled.div`
+export const HeadingContainer=styled.h1`
     display: flex;
     justify-content: center;
-    h1{
-       font-family: 'roboto',sans-serif;
-    }
+    font-family: "roboto", sans-serif;
+    /* padding-top: 12px;
+    padding-bottom: 12px; */
+    font-size: 28px;
+    font-weight: 700;
 `

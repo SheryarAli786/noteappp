@@ -1,26 +1,30 @@
 'use client';
-import React, { useState } from 'react';
-import { StyledBtn, StyledBtn2, StyledBtnContainer, WrapperContainer } from './HeaderStyleCom';
-import Modal from '../Modal/Modal';
-
-const Header = () => {
-  const [isModelOpen, setIsModelOpen] = useState(false);
+import React, { Dispatch, SetStateAction } from 'react';
+import { StyledBtn, StyledBtnContainer, WrapperContainer } from './HeaderStyle';
+import Modal from '../Notes/Modal/Modal';
+interface Headerprops{
+  setShowModal:Dispatch<SetStateAction<boolean>>;
+  refresher:()=>void;
+  showModel:boolean;
+  onDataUpdate:()=>void
+}
+const Header:React.FC<Headerprops> = ({setShowModal, showModel, refresher,onDataUpdate}) => {
   const openModel=()=>{
-    setIsModelOpen(true)
+    setShowModal(true)
   }
   const closeModel=()=>{
-    setIsModelOpen(false)
+    setShowModal(false)
   }
   return (
       <WrapperContainer>
         <h1> Notes</h1>
         <img src='images/add-icon.png' alt='Add Icon' onClick={openModel}/>
-        <StyledBtnContainer className='flex ml-auto'>
+        <StyledBtnContainer>
           <StyledBtn>All</StyledBtn>
-          <StyledBtn2>Only Stared</StyledBtn2>
+          <StyledBtn>Only Stared</StyledBtn>
         </StyledBtnContainer>
-      {isModelOpen &&(
-        <Modal closeModel={closeModel}/>
+      {showModel &&(
+        <Modal closeModel={closeModel}  refresher={refresher} onDataUpdate={onDataUpdate}/>
       )}
       </WrapperContainer>
   );

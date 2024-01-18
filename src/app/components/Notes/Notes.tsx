@@ -12,6 +12,7 @@ interface NoteItem {
   date: string;
   id:number;
 }
+
 const NotesComponent: React.FC<Noteprops> = ({item, refresher}) => {
   let savedData = JSON.parse(localStorage.getItem("myNotes") ?? '[]') || [];
   const handleDelete = () => {
@@ -25,6 +26,7 @@ const NotesComponent: React.FC<Noteprops> = ({item, refresher}) => {
       refresher();
     }
   };
+  
   return (
     <Container>
         <MainContainer style={{ backgroundColor: item.background }}>

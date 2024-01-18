@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ButtonsContainer, ColorContainer, ColorDateContainer, HeadingContainer, InputSectionContainer, MainContainer, NameContainer, DateContainer } from './ModalStyle'
+import { ButtonsContainer, ColorContainer, ColorDateContainer, HeadingContainer, InputSectionContainer, MainContainer, NameContainer, DateContainer, Buttons } from './ModalStyle'
 interface ModelProps{
     closeModel:()=>void;
     refresher:()=>void;
@@ -16,7 +16,6 @@ const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate})=> {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [background, setBackground] = useState("#ffffff");
-    // const [fontColor, setfontColor] = useState("#ffffff");
     const [date, setDate] = useState("");
     const handleAdd = () => {
       if (!title || !content) {
@@ -48,6 +47,7 @@ const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate})=> {
       const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDate(e.target.value);
       };
+
 return(
     <MainContainer>
         <HeadingContainer>
@@ -77,13 +77,13 @@ return(
         <input type="date" value={date}
             onChange={handleDate}/>
         </DateContainer>
-        <ButtonsContainer>
-            <button onClick={closeModel}>
+        <ButtonsContainer >
+            <Buttons onClick={closeModel}>
                 Back
-            </button>
-            <button className='button2' onClick={handleAdd}>
+            </Buttons>
+            <Buttons isBackground={true} isColor={true}  onClick={handleAdd}>
                 Save
-            </button>
+            </Buttons>
         </ButtonsContainer>
       </ColorDateContainer>
       </InputSectionContainer>

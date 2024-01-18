@@ -1,4 +1,8 @@
 import styled from "styled-components";
+interface StyledComponentProps {
+    isBackground?: boolean;
+    isColor?: boolean;
+}
 export const MainContainer=styled.div`
     position: absolute;
     top: 150px;
@@ -69,9 +73,9 @@ label{
 input{
     width: 40px;
     border:0px;
-        outline: none;
-        &:focus{
-            border:  2px solid skyblue;
+    outline: none;
+&:focus {
+    border:  2px solid skyblue;
         }
 }
     
@@ -92,26 +96,23 @@ label{
     border-radius: 5px;
     border: 2px solid #d6dadf;
     outline: none;
-        &:focus{
-            border:  2px solid skyblue;
-        }
+    &:focus{
+    border:  2px solid skyblue;
+    }
  }   
 `
 export const ButtonsContainer=styled.div`
     display: flex;
     padding-top:40px;
     gap: 12px;
-button{
+`
+export const Buttons=styled.button<StyledComponentProps>`
     font-size: 13px;
     border: 1px solid black;
     padding: 10px 20px;
-    background-color: white;
     border-radius: 4px;
-}
-.button2{
-    background-color: black;
-    color: white;
-}
+    color: ${(props) => (props. isColor ? 'white' : 'black')};
+    background-color: ${(props) => (props. isBackground ? 'black' : 'white')};
 `
 export const InputSectionContainer=styled.div`
     display: flex;
@@ -121,8 +122,6 @@ export const HeadingContainer=styled.h1`
     display: flex;
     justify-content: center;
     font-family: "roboto", sans-serif;
-    /* padding-top: 12px;
-    padding-bottom: 12px; */
     font-size: 28px;
     font-weight: 700;
 `

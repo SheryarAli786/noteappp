@@ -42,7 +42,7 @@ export const ParaContainer=styled.p`
         height: 250px;
 `
 export const DateContainer=styled.div`
-        display: flex;
+    display: flex;
     div{
         display: flex;
         gap: 10px;

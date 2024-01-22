@@ -57,13 +57,19 @@ export const NameContainer=styled.div`
 export const ColorDateContainer=styled.div`
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 20px;
     padding-top: 10px;
     `
 export const ColorContainer=styled.div`
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+div{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
 label{
     padding-top: 5px;
     font-weight: 600;
@@ -72,8 +78,9 @@ label{
 }
 input{
     width: 40px;
-    border:0px;
     outline: none;
+    border: 2px solid #f0f0f0;
+    cursor: pointer;
 &:focus {
     border:  2px solid skyblue;
         }
@@ -96,6 +103,7 @@ label{
     border-radius: 5px;
     border: 2px solid #d6dadf;
     outline: none;
+    cursor: pointer;
     &:focus{
     border:  2px solid skyblue;
     }
@@ -103,7 +111,7 @@ label{
 `
 export const ButtonsContainer=styled.div`
     display: flex;
-    padding-top:40px;
+    padding-top:30px;
     gap: 12px;
 `
 export const Buttons=styled.button<StyledComponentProps>`
@@ -111,6 +119,7 @@ export const Buttons=styled.button<StyledComponentProps>`
     border: 1px solid black;
     padding: 10px 20px;
     border-radius: 4px;
+    cursor: pointer;
     color: ${(props) => (props. isColor ? 'white' : 'black')};
     background-color: ${(props) => (props. isBackground ? 'black' : 'white')};
 `

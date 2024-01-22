@@ -1,48 +1,82 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ButtonsContainer, ColorContainer, ColorDateContainer, HeadingContainer, InputSectionContainer, MainContainer, NameContainer, DateContainer, Buttons } from './ModalStyle'
 interface ModelProps{
     closeModel:()=>void;
     refresher:()=>void;
-    onDataUpdate:()=>void
+    onDataUpdate:()=>void;
+    mode: string;
+    selectedNote: NoteItem | null;
 }
-interface Note {
+interface NoteItem {
     id: number;
     title: string;
     content: string;
     background: string;
+    fontColor:string;
     date: string;
   }
-const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate})=> {
+
+const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate, mode, selectedNote })=> {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [background, setBackground] = useState("#ffffff");
+    const [fontColor, setfontColor] = useState("#ffffff");
     const [date, setDate] = useState("");
+    useEffect(() => {
+      if (selectedNote) {
+        setTitle(selectedNote.title);
+        setContent(selectedNote.content);
+        setBackground(selectedNote.background);
+        setfontColor(selectedNote.fontColor);
+        setDate(selectedNote.date);
+      }
+    }, [selectedNote]);
     const handleAdd = () => {
       if (!title || !content) {
-        return alert("Title and Content is required");
+        return alert("Title and Content are required");
       }
-    const savedData: Note [] = JSON.parse(localStorage.getItem("myNotes") || '[]');
-            let newData: Note = {
-              id: Date.now(),
-              title,
-              content,
-              background,
-              date,
-            };
-            savedData.push(newData);
-            localStorage.setItem("myNotes", JSON.stringify(savedData));
-            setTitle("");
-            setContent("");
-            setDate("");
-           closeModel();
-           refresher();
-           onDataUpdate(); 
-      };
+      const savedData: NoteItem[] = JSON.parse(localStorage.getItem("myNotes") || '[]');
+      if (mode === 'edit' && selectedNote) {
+        const updatedData = savedData.map((note) =>
+          note.id === selectedNote.id
+            ? {
+                ...note,
+                title,
+                content,
+                background,
+                fontColor,
+                date,
+              }
+            : note
+        );
+        localStorage.setItem("myNotes", JSON.stringify(updatedData));
+      } else {
+        const newData: NoteItem = {
+          id: Date.now(),
+          title,
+          content,
+          background,
+          fontColor,
+          date,
+        };
+        savedData.push(newData);
+        localStorage.setItem("myNotes", JSON.stringify(savedData));
+      }
+      setTitle("");
+      setContent("");
+      setDate("");
+      closeModel();
+      refresher();
+      onDataUpdate();
+    };
       const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
       };
       const handleBackground = (e: React.ChangeEvent<HTMLInputElement>) => {
         setBackground(e.target.value);
+      };
+      const handlefontColor= (e: React.ChangeEvent<HTMLInputElement>) => {
+        setfontColor(e.target.value);
       };
       const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDate(e.target.value);
@@ -51,7 +85,7 @@ const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate})=> {
 return(
     <MainContainer>
         <HeadingContainer>
-                Add Note
+        {mode === 'add' ? 'Add Note' : 'Edit Note'}
         </HeadingContainer>
         <InputSectionContainer>
       <NameContainer>
@@ -68,9 +102,16 @@ return(
       </NameContainer>
       <ColorDateContainer>
         <ColorContainer>
-       <label >Select Color</label>
+        <div>
+       <label >Background Color</label>
         <input type="color" value={background}
             onChange={handleBackground} />
+       </div>
+       <div>
+            <label >Font color</label>
+        <input type="color" value={fontColor}
+            onChange={handlefontColor} />
+       </div>
         </ColorContainer>
         <DateContainer>
         <label>Date</label>

@@ -4,6 +4,7 @@ import Modal from './components/Notes/Modal/Modal';
 import NotesComponent from './components/Notes/Notes';
 import { useEffect, useState } from 'react';
 declare global {
+  
    interface Window {
      localStorage: Storage;
    }
@@ -16,12 +17,14 @@ declare global {
    date: string;
    item:string;
    id:number;
+   isStarred: boolean;
  }
 
 const Home: React.FC<NoteItem> = ()=> {
   const [data, setData] = useState([]);
   const [mode, setMode] = useState('');
    const [selectedNote, setSelectedNote] = useState<NoteItem | null>(null);
+   const [filterType, setFilterType] = useState('All');
  
    useEffect(() => {
      const storedData = window.localStorage.getItem("myNotes");
@@ -47,6 +50,9 @@ const Home: React.FC<NoteItem> = ()=> {
   const closeModel=()=>{
     setShowModel(false)
   }
+  const handleFilterChange = (type: string) => {
+    setFilterType(type);
+  };
    const handleDataUpdate = () => {
      refresher();
    };
@@ -54,18 +60,20 @@ const Home: React.FC<NoteItem> = ()=> {
 return(
    <div>  
    <Header
+    onFilterChange={handleFilterChange} 
     openModel={openAddModel}
    />
      <div className="page-container1">
-        {data.map((item: NoteItem) => (
-          <NotesComponent
-            key={item.id}
-            refresher={refresher}
-            openModel={() => openEditModel(item)}
-            item={item}
-          />
-          ))
-        }
+        {data
+          .filter((item: NoteItem) => (filterType === 'All' ? true : item.isStarred))
+          .map((item: NoteItem) => (
+            <NotesComponent
+              key={item.id}
+              refresher={refresher}
+              openModel={() => openEditModel(item)}
+              item={item}
+            />
+          ))}
       </div>
       {showModel &&(
         <Modal closeModel={closeModel} 

@@ -22,6 +22,7 @@ const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate, mode, se
     const [background, setBackground] = useState("#ffffff");
     const [fontColor, setfontColor] = useState("#ffffff");
     const [date, setDate] = useState("");
+
     useEffect(() => {
       if (selectedNote) {
         setTitle(selectedNote.title);
@@ -31,6 +32,7 @@ const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate, mode, se
         setDate(selectedNote.date);
       }
     }, [selectedNote]);
+
     const handleAdd = () => {
       if (!title || !content) {
         return alert("Title and Content are required");
@@ -69,15 +71,19 @@ const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate, mode, se
       refresher();
       onDataUpdate();
     };
+
       const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
       };
+
       const handleBackground = (e: React.ChangeEvent<HTMLInputElement>) => {
         setBackground(e.target.value);
       };
+
       const handlefontColor= (e: React.ChangeEvent<HTMLInputElement>) => {
         setfontColor(e.target.value);
       };
+
       const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDate(e.target.value);
       };
@@ -112,20 +118,19 @@ return(
         <input type="color" value={fontColor}
             onChange={handlefontColor} />
        </div>
-        </ColorContainer>
-        <DateContainer>
-        <label>Date</label>
-        <input type="date" value={date}
-            onChange={handleDate}/>
-        </DateContainer>
-        <ButtonsContainer >
-            <Buttons onClick={closeModel}>
+      </ColorContainer>
+      <DateContainer>
+      <label>Date</label>
+      <input type="date" value={date} onChange={handleDate}/>
+      </DateContainer>
+      <ButtonsContainer >
+      <Buttons onClick={closeModel}>
                 Back
-            </Buttons>
-            <Buttons isBackground={true} isColor={true}  onClick={handleAdd}>
+      </Buttons>
+      <Buttons isBackground={true} isColor={true}  onClick={handleAdd}>
                 Save
-            </Buttons>
-        </ButtonsContainer>
+      </Buttons>
+      </ButtonsContainer>
       </ColorDateContainer>
       </InputSectionContainer>
     </MainContainer>

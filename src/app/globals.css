@@ -1,11 +1,8 @@
 .page-container1{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin-right: -15px;
-    margin-left: -15px;
-    margin-right: 0 ;
-    margin-left: 0 ;
+    gap: 10px;
+    margin-left: 30px ;
     padding: 5px ;
 }
 .page-container2{

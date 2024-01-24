@@ -1,8 +1,10 @@
 import styled from "styled-components";
+
 interface StyledComponentProps {
     isBackground?: boolean;
     isColor?: boolean;
 }
+
 export const MainContainer=styled.div`
     position: absolute;
     top: 150px;
@@ -84,8 +86,7 @@ input{
 &:focus {
     border:  2px solid skyblue;
         }
-}
-    
+} 
 `
 export const DateContainer=styled.div`
     display: flex;

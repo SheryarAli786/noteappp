@@ -13,10 +13,9 @@ interface NoteItem {
   fontColor:string;
   date: string;
   id:number;
+  isStarred: boolean;
 }
-
 const NotesComponent: React.FC<Noteprops> = ({item, refresher, openModel}) => {
-  let savedData = JSON.parse(localStorage.getItem("myNotes") ?? '[]') || [];
   const [showConModel, setShowConModel] = useState(false);
 
   const handleDelete = () => {
@@ -29,13 +28,23 @@ const NotesComponent: React.FC<Noteprops> = ({item, refresher, openModel}) => {
 
   const handleConfirm = () => {
     setShowConModel(false);
+    const savedData = JSON.parse(localStorage.getItem('myNotes') ?? '[]') || [];
     if (savedData.length) {
-      let newData = savedData.filter((data: any) => data.id !== item.id);
+      const newData = savedData.filter((data: any) => data.id !== item.id);
       localStorage.setItem('myNotes', JSON.stringify(newData));
       refresher();
     }
   };
   
+  const toggleStar = () => {
+  const updatedItem = { ...item, isStarred: !item.isStarred };
+  const savedData = JSON.parse(localStorage.getItem('myNotes') ?? '[]') || [];
+  const updatedData = savedData.map((data: any) =>
+      data.id === updatedItem.id ? updatedItem : data
+    );
+    localStorage.setItem('myNotes', JSON.stringify(updatedData));
+    refresher();
+  };
   return (
     <Container>
         <MainContainer style={{ backgroundColor: item.background }}>
@@ -44,10 +53,14 @@ const NotesComponent: React.FC<Noteprops> = ({item, refresher, openModel}) => {
             {item.content}
           </ParaContainer>
           <DateContainer>
-            {item.date}
+          <span style={{ color: item.fontColor}}>{item.date}</span>  
             <div>
                 <img src="images/edit-icon3.png" alt="" onClick={openModel} />
-              <img src="images/star-icon2.png" alt="" />
+                <img
+              src={item.isStarred ? 'images/star-icon-filled.png' : 'images/star-icon2.png'}
+              alt=""
+              onClick={toggleStar}
+            />
             </div>
           </DateContainer>
           <CloseIcon src="images/close-icon.png" alt="" onClick={handleDelete}/>

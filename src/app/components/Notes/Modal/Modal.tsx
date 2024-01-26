@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { ButtonsContainer, ColorContainer, ColorDateContainer, HeadingContainer, InputSectionContainer, MainContainer, NameContainer, DateContainer, Buttons } from './ModalStyle'
+import { ButtonsContainer, ColorContainer, ColorDateContainer, HeadingContainer, InputSectionContainer, MainContainer, NameContainer, DateContainer, Buttons, Label } from './ModalStyle'
+import { ModelOverlay } from '../NotesStyle';
+
 interface ModelProps{
     closeModel:()=>void;
     refresher:()=>void;
@@ -7,6 +9,7 @@ interface ModelProps{
     mode: string;
     selectedNote: NoteItem | null;
 }
+
 interface NoteItem {
     id: number;
     title: string;
@@ -34,9 +37,10 @@ const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate, mode, se
     }, [selectedNote]);
 
     const handleAdd = () => {
-      if (!title || !content) {
-        return alert("Title and Content are required");
-      }
+      if (!title || !content || !date) {
+        return alert("Title, Content and Date are required");
+      } 
+      
       const savedData: NoteItem[] = JSON.parse(localStorage.getItem("myNotes") || '[]');
       if (mode === 'edit' && selectedNote) {
         const updatedData = savedData.map((note) =>
@@ -89,17 +93,18 @@ const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate, mode, se
       };
 
 return(
+  <ModelOverlay>
     <MainContainer>
         <HeadingContainer>
         {mode === 'add' ? 'Add Note' : 'Edit Note'}
         </HeadingContainer>
         <InputSectionContainer>
       <NameContainer>
-        <label>Name</label>
+        <Label>Name</Label>
         <input type='text' placeholder='Enter name'  
          value={title}
             onChange={handleTitle}></input>
-        <label>Description</label>
+        <Label>Description</Label>
         <textarea placeholder='Add more details'     
          value={content}
             onChange={(e) => {
@@ -109,18 +114,18 @@ return(
       <ColorDateContainer>
         <ColorContainer>
         <div>
-       <label >Background Color</label>
+       <Label>Background Color</Label>
         <input type="color" value={background}
             onChange={handleBackground} />
        </div>
        <div>
-            <label >Font color</label>
+            <Label>Font color</Label>
         <input type="color" value={fontColor}
             onChange={handlefontColor} />
        </div>
       </ColorContainer>
       <DateContainer>
-      <label>Date</label>
+      <Label>Date</Label>
       <input type="date" value={date} onChange={handleDate}/>
       </DateContainer>
       <ButtonsContainer >
@@ -134,5 +139,6 @@ return(
       </ColorDateContainer>
       </InputSectionContainer>
     </MainContainer>
+    </ModelOverlay>
   )}
 export default Modal

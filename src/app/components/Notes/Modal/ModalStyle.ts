@@ -6,30 +6,24 @@ interface StyledComponentProps {
 }
 
 export const MainContainer=styled.div`
-    position: absolute;
     top: 150px;
-    right: 350px;
-    z-index: 3;
-    height: 450px;
     margin: auto;
-    width: 600px;
+    padding: 0px 25px 30px 25px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 10px;
     background-color: white;
 `
+export const Label=styled.label`
+
+`
 export const NameContainer=styled.div`
     display: flex;
     flex-direction: column;
-    padding-left: 20px;
-    padding-top: 10px;
-    label{
-        font-weight: 600;
-        font-size: 14px;
-        font-family: 'roboto',sans-serif;
-    }
+    gap: 5px;
+    font-weight:600;
+    font-size: 14px;
+
     input{
-        margin-top: 5px;
-        width: 200px;
         padding: 5px;
         border-radius: 3px;
         margin-bottom: 20px;
@@ -40,9 +34,9 @@ export const NameContainer=styled.div`
         }
     }
     textarea{
-        font-family: 'roboto',sans-serif;
+       
         padding-top: 5px;
-        width: 200px;
+        padding-left: 10px;
         height: 200px;
         border-radius: 5px;
         margin-top: 5px;
@@ -52,7 +46,7 @@ export const NameContainer=styled.div`
             border:  2px solid skyblue;
         }
        &::placeholder{
-        padding-left: 5px;
+        padding-left: 0px;
        }
     }
 `
@@ -61,6 +55,8 @@ export const ColorDateContainer=styled.div`
     flex-direction: column;
     gap: 20px;
     padding-top: 10px;
+    font-weight:600;
+    font-size: 14px;
     `
 export const ColorContainer=styled.div`
     display: flex;
@@ -71,13 +67,6 @@ div{
     flex-direction: column;
     gap: 7px;
 }
-
-label{
-    padding-top: 5px;
-    font-weight: 600;
-    font-size: 14px;
-    font-family: 'roboto',sans-serif;  
-}
 input{
     width: 40px;
     outline: none;
@@ -86,21 +75,15 @@ input{
 &:focus {
     border:  2px solid skyblue;
         }
-} 
+}
 `
 export const DateContainer=styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
-label{
-    padding-top: 5px;
-    font-weight: 600;
-    font-size: 14px;
-    font-family: 'roboto',sans-serif;  
-}
+  
  input{
     height: 25px;
-    width: 150px;
     border-radius: 5px;
     border: 2px solid #d6dadf;
     outline: none;
@@ -126,7 +109,7 @@ export const Buttons=styled.button<StyledComponentProps>`
 `
 export const InputSectionContainer=styled.div`
     display: flex;
-    gap: 150px;
+    gap: 20px;
 `
 export const HeadingContainer=styled.h1`
     display: flex;

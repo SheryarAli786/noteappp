@@ -1,11 +1,13 @@
 'use client'
 import React, { useState } from 'react';
-import { CloseIcon, Container, DateContainer, MainContainer, ModelContent, ModelOverlay, ParaContainer} from'./NotesStyle';
+import { CloseIcon, Container, DateContainer, MainContainer, ModelContent, ModelOverlay, ParaContainer} from'./NotesStyle'; 
+
 interface Noteprops {
   item: NoteItem;
   refresher:()=>void;
   openModel:()=>void;
 }
+
 interface NoteItem {
   title: string;
   content: string;
@@ -15,6 +17,7 @@ interface NoteItem {
   id:number;
   isStarred: boolean;
 }
+
 const NotesComponent: React.FC<Noteprops> = ({item, refresher, openModel}) => {
   const [showConModel, setShowConModel] = useState(false);
 
@@ -45,6 +48,7 @@ const NotesComponent: React.FC<Noteprops> = ({item, refresher, openModel}) => {
     localStorage.setItem('myNotes', JSON.stringify(updatedData));
     refresher();
   };
+  
   return (
     <Container>
         <MainContainer style={{ backgroundColor: item.background }}>
@@ -55,7 +59,7 @@ const NotesComponent: React.FC<Noteprops> = ({item, refresher, openModel}) => {
           <DateContainer>
           <span style={{ color: item.fontColor}}>{item.date}</span>  
             <div>
-                <img src="images/edit-icon3.png" alt="" onClick={openModel} />
+                <img src="images/edit-icon3.png" onClick={openModel} />
                 <img
               src={item.isStarred ? 'images/star-icon-filled.png' : 'images/star-icon2.png'}
               alt=""
@@ -63,7 +67,7 @@ const NotesComponent: React.FC<Noteprops> = ({item, refresher, openModel}) => {
             />
             </div>
           </DateContainer>
-          <CloseIcon src="images/close-icon.png" alt="" onClick={handleDelete}/>
+          <CloseIcon src="images/icons8-close-24.png" alt="" onClick={handleDelete}/>
         </MainContainer>
         {showConModel && (
         <ModelOverlay>

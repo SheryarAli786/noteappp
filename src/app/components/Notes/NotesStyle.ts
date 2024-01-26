@@ -1,10 +1,14 @@
 import styled from "styled-components";
+
 export const CloseIcon = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
+  background-color: black;
+  padding: 3px;
+  border-radius: 50px;
   position: absolute;
-  top: -11px;
-  right: -6px;
+  top: -12px;
+  right: -7px;
   opacity: 0;
   transition: opacity 0.3s ease; 
   cursor: pointer;
@@ -27,11 +31,12 @@ export const MainContainer=styled.div`
     position: relative;
     margin-top: 5px;
     margin-left: 10px;
-    padding: 20px;
+    padding: 5px 20px 20px 20px;
     border-radius: 10px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     h1{
-    font-weight: 400;
+    font-size:25px;
+    font-weight: 600;
     font-family: 'Roboto', sans-serif;
     }
     p{ 

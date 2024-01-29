@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface ParaContainerProps {
+  scrollbarColor?: string;
+}
+
 export const CloseIcon = styled.img`
   width: 15px;
   height: 15px;
@@ -37,18 +41,33 @@ export const MainContainer=styled.div`
     h1{
     font-size:25px;
     font-weight: 600;
+    margin-bottom: 0px;
     font-family: 'Roboto', sans-serif;
     }
-    p{ 
+`
+
+export const ParaContainer=styled.p<ParaContainerProps>`
+    height: 250px;
     font-size: 15px;
     font-family: 'Roboto', sans-serif;
-    }
-`
-export const ParaContainer=styled.p`
-    height: 250px;
+    overflow: auto;
+&::-webkit-scrollbar {
+    width: 12px;              
+  }
+
+&::-webkit-scrollbar-track {
+  background-color: lightgray;    
+  border-radius :10px;
+  }
+
+&::-webkit-scrollbar-thumb {
+  background-color: ${(props) => props.scrollbarColor };    
+  border-radius: 20px;      
+  border: 2px solid  lightgray;  
+ } 
 `
 export const DateContainer=styled.div`
-    display: flex;
+    display: flex; 
     div{
     display: flex;
     gap: 10px;
@@ -61,6 +80,12 @@ export const DateContainer=styled.div`
     width: 20px;
     border-radius: 50%;
     cursor: pointer;
+    }
+    img:hover{
+    background-color: brown;
+    }
+    span{
+      padding-top: 8px;
     }
 `;
 export const ModelOverlay = styled.div`

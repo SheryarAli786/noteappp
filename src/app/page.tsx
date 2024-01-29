@@ -36,7 +36,7 @@ const Home: React.FC<NoteItem> = ()=> {
  
    const [showModel, setShowModel] = useState(false);
  
-   const refresher = () => {
+   const handleDataUpdate = () => {
      const storedData = window.localStorage.getItem("myNotes");
      setData(storedData ? JSON.parse(storedData) : []);
    };
@@ -60,16 +60,10 @@ const Home: React.FC<NoteItem> = ()=> {
   const handleFilterChange = (type: string) => {
     setFilterType(type);
   };
-  
-   const handleDataUpdate = () => {
-     refresher();
-   };
-
 return(
    <div>  
    <Header
     onFilterChange={handleFilterChange} 
-    openModel={openAddModel}
    />
      <div className="page-container1">
      <AddIcon src='images/icons8-add-48.png' alt= 'Add Icon' onClick={openAddModel}/>
@@ -78,7 +72,7 @@ return(
           .map((item: NoteItem) => (
             <NotesComponent
               key={item.id}
-              refresher={refresher}
+              handleDataUpdate={handleDataUpdate}
               openModel={() => openEditModel(item)}
               item={item}
             />
@@ -86,8 +80,7 @@ return(
       </div>
       {showModel &&(
         <Modal closeModel={closeModel} 
-         refresher={refresher}   
-         onDataUpdate={handleDataUpdate}
+         handleDataUpdate={handleDataUpdate}   
          mode={mode}
          selectedNote={selectedNote}
          />

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { StyledBtn, StyledBtnContainer, WrapperContainer } from './HeaderStyle';
 
 interface Headerprops{
-  openModel:(item:any)=>void
   onFilterChange: (type: string) => void;
 }
 

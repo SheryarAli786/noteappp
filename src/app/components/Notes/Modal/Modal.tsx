@@ -1,25 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { ButtonsContainer, ColorContainer, ColorDateContainer, HeadingContainer, InputSectionContainer, MainContainer, NameContainer, DateContainer, Buttons, Label } from './ModalStyle'
 import { ModelOverlay } from '../NotesStyle';
+import { NoteItems } from '@/app/components/Notes/types';
+import { ModelProps } from '@/app/components/Notes/types';
 
-interface ModelProps{
-    closeModel:()=>void;
-    refresher:()=>void;
-    onDataUpdate:()=>void;
-    mode: string;
-    selectedNote: NoteItem | null;
-}
-
-interface NoteItem {
-    id: number;
-    title: string;
-    content: string;
-    background: string;
-    fontColor:string;
-    date: string;
-  }
-
-const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate, mode, selectedNote })=> {
+const Modal:React.FC<ModelProps>=({closeModel, handleDataUpdate, mode, selectedNote })=> {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [background, setBackground] = useState("#ffffff");
@@ -40,8 +25,8 @@ const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate, mode, se
       if (!title || !content || !date) {
         return alert("Title, Content and Date are required");
       } 
-      
-      const savedData: NoteItem[] = JSON.parse(localStorage.getItem("myNotes") || '[]');
+
+      const savedData: NoteItems[] = JSON.parse(localStorage.getItem("myNotes") || '[]');
       if (mode === 'edit' && selectedNote) {
         const updatedData = savedData.map((note) =>
           note.id === selectedNote.id
@@ -57,7 +42,7 @@ const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate, mode, se
         );
         localStorage.setItem("myNotes", JSON.stringify(updatedData));
       } else {
-        const newData: NoteItem = {
+        const newData: NoteItems = {
           id: Date.now(),
           title,
           content,
@@ -72,8 +57,7 @@ const Modal:React.FC<ModelProps>=({closeModel, refresher, onDataUpdate, mode, se
       setContent("");
       setDate("");
       closeModel();
-      refresher();
-      onDataUpdate();
+      handleDataUpdate();
     };
 
       const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,7 +88,7 @@ return(
         <input type='text' placeholder='Enter name'  
          value={title}
             onChange={handleTitle}></input>
-        <Label>Description</Label>
+        <Label className='disc'>Description</Label>
         <textarea placeholder='Add more details'     
          value={content}
             onChange={(e) => {
@@ -119,7 +103,7 @@ return(
             onChange={handleBackground} />
        </div>
        <div>
-            <Label>Font color</Label>
+          <Label>Font color</Label>
         <input type="color" value={fontColor}
             onChange={handlefontColor} />
        </div>

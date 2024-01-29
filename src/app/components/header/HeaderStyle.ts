@@ -28,6 +28,9 @@ export const AddIcon=styled.img`
   right: 100px;
   top: 650px;
   cursor: pointer;
+  &:hover{
+    background-color: brown;
+  }
 `
 export const StyledBtnContainer=styled.div`
   display: flex;

@@ -1,24 +1,8 @@
 'use client'
 import React, { useState } from 'react';
 import { CloseIcon, Container, DateContainer, MainContainer, ModelContent, ModelOverlay, ParaContainer} from'./NotesStyle'; 
-
-interface Noteprops {
-  item: NoteItem;
-  refresher:()=>void;
-  openModel:()=>void;
-}
-
-interface NoteItem {
-  title: string;
-  content: string;
-  background: string;
-  fontColor:string;
-  date: string;
-  id:number;
-  isStarred: boolean;
-}
-
-const NotesComponent: React.FC<Noteprops> = ({item, refresher, openModel}) => {
+import { Noteprops } from './types';
+const NotesComponent: React.FC<Noteprops> = ({item, handleDataUpdate, openModel}) => {
   const [showConModel, setShowConModel] = useState(false);
 
   const handleDelete = () => {
@@ -35,7 +19,7 @@ const NotesComponent: React.FC<Noteprops> = ({item, refresher, openModel}) => {
     if (savedData.length) {
       const newData = savedData.filter((data: any) => data.id !== item.id);
       localStorage.setItem('myNotes', JSON.stringify(newData));
-      refresher();
+      handleDataUpdate();
     }
   };
   
@@ -46,14 +30,14 @@ const NotesComponent: React.FC<Noteprops> = ({item, refresher, openModel}) => {
       data.id === updatedItem.id ? updatedItem : data
     );
     localStorage.setItem('myNotes', JSON.stringify(updatedData));
-    refresher();
+    handleDataUpdate();
   };
-  
+
   return (
     <Container>
         <MainContainer style={{ backgroundColor: item.background }}>
           <h1 style={{ color: item.fontColor }}>{item.title}</h1>
-          <ParaContainer style={{ color: item.fontColor}}>
+          <ParaContainer style={{ color: item.fontColor}}  scrollbarColor={item.background}>
             {item.content}
           </ParaContainer>
           <DateContainer>

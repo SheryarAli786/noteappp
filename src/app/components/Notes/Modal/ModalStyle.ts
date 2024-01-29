@@ -7,72 +7,71 @@ interface StyledComponentProps {
 
 export const MainContainer=styled.div`
     top: 150px;
-    margin: auto;
     padding: 0px 25px 30px 25px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 10px;
     background-color: white;
 `
 export const Label=styled.label`
-
+    font-weight:600;
+    font-size: 14px;
 `
 export const NameContainer=styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
-    font-weight:600;
-    font-size: 14px;
+    .disc{
+        padding-top: 20px;
+    }
 
     input{
-        padding: 5px;
         border-radius: 3px;
-        margin-bottom: 20px;
         border: 2px solid #d6dadf;
         outline: none;
+        padding: 2px;
         &:focus{
             border:  2px solid skyblue;
+        }
+        &::placeholder{
+            font-size: 12px;
+            font-family: 'roboto',sans-serif;
         }
     }
     textarea{
-       
         padding-top: 5px;
-        padding-left: 10px;
         height: 200px;
         border-radius: 5px;
-        margin-top: 5px;
         border: 2px solid #d6dadf;
         outline: none;
         &:focus{
             border:  2px solid skyblue;
         }
-       &::placeholder{
-        padding-left: 0px;
-       }
+        &::placeholder{
+            font-size: 12px;
+            font-family: 'roboto',sans-serif;
+        }
     }
 `
 export const ColorDateContainer=styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding-top: 10px;
-    font-weight:600;
-    font-size: 14px;
     `
 export const ColorContainer=styled.div`
     display: flex;
     flex-direction: column;
-    gap: 15px;
-div{
+    gap: 25px;
+    div{
     display: flex;
     flex-direction: column;
     gap: 7px;
-}
-input{
+    }
+    input{
     width: 40px;
     outline: none;
     border: 2px solid #f0f0f0;
     cursor: pointer;
-&:focus {
+    &:focus {
     border:  2px solid skyblue;
         }
 }
@@ -81,12 +80,14 @@ export const DateContainer=styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: max-content;
   
- input{
-    height: 25px;
+    input{
     border-radius: 5px;
+    padding: 5px;
     border: 2px solid #d6dadf;
     outline: none;
+    width: 158px;
     cursor: pointer;
     &:focus{
     border:  2px solid skyblue;

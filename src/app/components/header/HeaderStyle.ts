@@ -1,11 +1,11 @@
+import {Flex} from "@/app/globalFlex";
 import styled from "styled-components";
 
 export interface StyledBtnProps {
   active: boolean;
 }
 
-export const WrapperContainer=styled.div`
-  display:flex;
+export const WrapperContainer=styled(Flex)`
   padding-top:20px;
   align-items: center;
   position: relative;
@@ -25,15 +25,14 @@ export const AddIcon=styled.img`
   border-radius: 50px;
   background-color: black;
   position: absolute;
-  right: 100px;
-  top: 650px;
+  right: 30px;
+  bottom: 30px;
   cursor: pointer;
   &:hover{
     background-color: brown;
   }
 `
-export const StyledBtnContainer=styled.div`
-  display: flex;
+export const StyledBtnContainer=styled(Flex)`
   margin-left: auto;
 `
 export const StyledBtn = styled.button<StyledBtnProps>`

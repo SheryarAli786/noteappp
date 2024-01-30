@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Flex, FlexColumn } from "@/app/globalFlex";
 interface StyledComponentProps {
     isBackground?: boolean;
     isColor?: boolean;
@@ -16,9 +16,8 @@ export const Label=styled.label`
     font-weight:600;
     font-size: 14px;
 `
-export const NameContainer=styled.div`
-    display: flex;
-    flex-direction: column;
+export const NameContainer=styled(FlexColumn)`
+
     gap: 5px;
     .disc{
         padding-top: 20px;
@@ -52,14 +51,10 @@ export const NameContainer=styled.div`
         }
     }
 `
-export const ColorDateContainer=styled.div`
-    display: flex;
-    flex-direction: column;
+export const ColorDateContainer=styled(FlexColumn)`
     gap: 20px;
     `
-export const ColorContainer=styled.div`
-    display: flex;
-    flex-direction: column;
+export const ColorContainer= styled(FlexColumn)`
     gap: 25px;
     div{
     display: flex;
@@ -76,9 +71,7 @@ export const ColorContainer=styled.div`
         }
 }
 `
-export const DateContainer=styled.div`
-    display: flex;
-    flex-direction: column;
+export const DateContainer= styled(FlexColumn)`
     gap: 10px;
     width: max-content;
   
@@ -94,8 +87,7 @@ export const DateContainer=styled.div`
     }
  }   
 `
-export const ButtonsContainer=styled.div`
-    display: flex;
+export const ButtonsContainer=styled(Flex)`
     padding-top:30px;
     gap: 12px;
 `
@@ -108,12 +100,11 @@ export const Buttons=styled.button<StyledComponentProps>`
     color: ${(props) => (props. isColor ? 'white' : 'black')};
     background-color: ${(props) => (props. isBackground ? 'black' : 'white')};
 `
-export const InputSectionContainer=styled.div`
-    display: flex;
+export const InputSectionContainer=styled(Flex)`
     gap: 20px;
 `
-export const HeadingContainer=styled.h1`
-    display: flex;
+export const HeadingContainer=styled(Flex)`
+    padding: 15px;
     justify-content: center;
     font-family: "roboto", sans-serif;
     font-size: 28px;

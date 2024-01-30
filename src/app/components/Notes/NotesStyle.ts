@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Flex, FlexColumn } from "../../globalFlex";
 
 interface ParaContainerProps {
   scrollbarColor?: string;
@@ -17,34 +18,31 @@ export const CloseIcon = styled.img`
   transition: opacity 0.3s ease; 
   cursor: pointer;
 `;
-export const Container=styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: start;
-    position: relative;
-    &:hover ${CloseIcon} {
+
+export const Container = styled(Flex)`
+  position: relative;
+  &:hover ${CloseIcon} {
     opacity: 1;
   }
-`
-export const MainContainer=styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 250px;
-    width: 280px;
-    position: relative;
-    margin-top: 5px;
-    margin-left: 10px;
-    padding: 5px 20px 20px 20px;
-    border-radius: 10px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    h1{
-    font-size:25px;
+`; 
+
+export const MainContainer = styled(FlexColumn)`
+  height: 250px;
+  width: 280px;
+  position: relative;
+  margin-top: 5px;
+  margin-left: 10px;
+  padding: 5px 20px 20px 20px;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  h1 {
+    font-size: 25px;
     font-weight: 600;
     margin-bottom: 0px;
     font-family: 'Roboto', sans-serif;
-    }
-`
+  }
+`;
 
 export const ParaContainer=styled.p<ParaContainerProps>`
     height: 250px;
@@ -66,8 +64,8 @@ export const ParaContainer=styled.p<ParaContainerProps>`
   border: 2px solid  lightgray;  
  } 
 `
-export const DateContainer=styled.div`
-    display: flex; 
+export const DateContainer=styled(Flex)`
+   
     div{
     display: flex;
     gap: 10px;
@@ -88,14 +86,13 @@ export const DateContainer=styled.div`
       padding-top: 8px;
     }
 `;
-export const ModelOverlay = styled.div`
+export const ModelOverlay = styled(Flex)`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;

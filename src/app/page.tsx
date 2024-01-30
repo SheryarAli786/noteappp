@@ -1,95 +1,90 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client'
+import Header from './components/header/Header';
+import { AddIcon } from './components/header/HeaderStyle';
+import Modal from './components/Notes/Modal/Modal';
+import NotesComponent from './components/Notes/Notes';
+import { useEffect, useState } from 'react';
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+declare global {
+  
+   interface Window {
+     localStorage: Storage;
+   }
+ }
+
+ interface NoteItem {
+   title: string;
+   content: string;
+   background: string;
+   fontColor:string;
+   date: string;
+   item:string;
+   id:number;
+   isStarred: boolean;
+ }
+
+const Home: React.FC<NoteItem> = ()=> {
+  const [data, setData] = useState([]);
+  const [mode, setMode] = useState('');
+   const [selectedNote, setSelectedNote] = useState<NoteItem | null>(null);
+   const [filterType, setFilterType] = useState('All');
+
+   useEffect(() => {
+     const storedData = window.localStorage.getItem("myNotes");
+     setData(storedData ? JSON.parse(storedData) : []);
+   }, []);
+ 
+   const [showModel, setShowModel] = useState(false);
+ 
+   const handleDataUpdate = () => {
+     const storedData = window.localStorage.getItem("myNotes");
+     setData(storedData ? JSON.parse(storedData) : []);
+   };
+
+   const openAddModel = () => {
+    setMode('add');
+    setSelectedNote(null);
+    setShowModel(true);
+  };
+
+  const openEditModel = (note: NoteItem) => {
+    setMode('edit');
+    setSelectedNote(note);
+    setShowModel(true);
+  };
+
+  const closeModel=()=>{
+    setShowModel(false)
+  };
+
+  const handleFilterChange = (type: string) => {
+    setFilterType(type);
+  };
+return(
+   <div>  
+   <Header
+    onFilterChange={handleFilterChange} 
+   />
+     <div className="page-container1">
+     <AddIcon src='images/icons8-add-48.png' alt= 'Add Icon' onClick={openAddModel}/>
+        {data
+          .filter((item: NoteItem) => (filterType === 'All' ? true : item.isStarred))
+          .map((item: NoteItem) => (
+            <NotesComponent
+              key={item.id}
+              handleDataUpdate={handleDataUpdate}
+              openModel={() => openEditModel(item)}
+              item={item}
             />
-          </a>
-        </div>
+          ))}
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+      {showModel &&(
+        <Modal closeModel={closeModel} 
+         handleDataUpdate={handleDataUpdate}   
+         mode={mode}
+         selectedNote={selectedNote}
+         />
+      )}
+   </div>
+)}
+export default Home;
